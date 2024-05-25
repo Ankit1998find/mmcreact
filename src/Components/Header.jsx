@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./css/Header.css";
 
 const Header = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <header id="header" className="fixed-top d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between">
         <div className="logo">
           <Link to="/">
-            <img src="assets/img/logo.png" alt="" className="img-fluid" />
+            <img src="assets/img/logo.png" alt="logo" className="img-fluid" />
           </Link>
         </div>
 
-        <nav id="navbar" className="navbar">
+        <nav id="navbar" className={`navbar ${isNavOpen ? "active" : ""}`}>
           <ul>
             <li>
               <Link className="nav-link scrollto active" to="/">
@@ -36,7 +43,6 @@ const Header = () => {
                     GIS Application Development
                   </Link>
                 </li>
-
                 <li>
                   <Link to="/remote-sensing">Remote Sensing</Link>
                 </li>
@@ -47,7 +53,9 @@ const Header = () => {
                   <Link to="/gis-photogrammetry">Photogrammetry</Link>
                 </li>
                 <li>
-                  <Link to="/gis-data-analysis">GIS Data/Analysis Services</Link>
+                  <Link to="/gis-data-analysis">
+                    GIS Data/Analysis Services
+                  </Link>
                 </li>
                 <li>
                   <Link to="#">Geocoding Services</Link>
@@ -77,8 +85,12 @@ const Header = () => {
               </Link>
             </li>
           </ul>
-          <i className="bi bi-list mobile-nav-toggle"></i>
         </nav>
+        <i
+          className="bi bi-list mobile-nav-toggle"
+          onClick={toggleNav}
+          style={{ fontSize: "24px", cursor: "pointer" }}
+        ></i>
       </div>
     </header>
   );
